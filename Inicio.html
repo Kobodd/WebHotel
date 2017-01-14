@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Habitaciones</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    <body>
+    
+    <!--
+        Portada Principal del Hotel
+    -->
+        <div class="row">
+            <div class="col-md-12">
+                <img class="img-rounded" src="Imagenes/PortadaPrincipal.jpg" width="100%" height=750px>
+            </div>
+        </div> 
+        
+    <!--
+        Principal Descripcion del Hotel
+    -->
+        <div class="container">
+            <h1 class="text-center">Hotel Simon Park</h1>
+            <h5>El Simon park es un hotel de 4 estrellas situado en primera del paseo del arenal con unas vistas expectaculares a el agua cristalina que tenemos en estas islas.</h5>
+            <h5>Las habitaciones con la que contamos en el Simon park son de ultima generacion renovadas hace 2 años por expertos architectos.</h5>
+        </div>
+        
+    <!--
+        Botones a otras paginas
+    -->
+        <div class="btn-group btn-group-justified">
+            <a href="Inicio.html" class="btn btn-primary">Principal</a>
+            <a href="Habitaciones.html" class="btn btn-primary">Habitacion</a>
+            <a href="Oferta.html" class="btn btn-primary">Oferta</a>
+            <a href="Contacto.html" class="btn btn-primary">Contacto</a>
+        </div>
+    
+    <!--
+        "Interior de la pagina inicio"
+    -->
+
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 class="text-center"> Descripcion:</h2>
+                <p>Espectaculares terrazas con vistas privilegiadas.</p>
+                <p>Restaurante de alta gastronomía y magníficos bares con servicio de coctelería/snacks. Desayuno buffet con show cooking y posibilidad de desayunar en la terraza.</p>
+                <p>Conexión de internet gratuita (WIFI) .</p>
+                <p>Piscina exterior de agua salada y piscina cubierta climatizada.</p>
+                <p>Parking exterior y garaje cubierto.</p>
+                <p>Centro de Convenciones, pensado y concebido para satisfacer todas las necesidades de los clientes de negocios.</p>
+                
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#leermas">Seguir leyendo</button>
+                <div id="leermas" class="collapse">
+                    Disfrute en nuestras habitaciones superiores del exclusivo servicio RedLevel, la mayor apuesta de la marca Simon Park por la gama más alta de servicios personalizados y de lujo.
+                    Aproveche la oportunidad de relajarse en nuestra área de Wellness y Fitness, disfrutar de la piscina con vistas exclusivas, aprovechar los descuentos en los Green Fees en más de los 20 campos de golf de la isla o respirar el ambiente cosmopolita de las terrazas cercanas al hotel.
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1563.0670802058157!2d2.7496377232744726!3d39.50658566916089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1484237124188" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    <!--
+        Carrusel de Imagenesa del hotel
+    -->
+        <div class="container">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <img src="Imagenes/vestibulo.jpg" alt="Vestibulo" class="img-responsive"  width="1140" height="750">
+                      <div class="carousel-caption">
+                        <h3>Vestibulo</h3>
+                        <p>Nuestro espectacular Vestibulo</p>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <img src="Imagenes/Habitacion.jpg" alt="habitacion"  class="img-responsive"  width="1140" height="750">
+                      <div class="carousel-caption">
+                        <h3>habitaciones basicas</h3>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <img src="Imagenes/HabitacionBalcon.jpeg" alt="habitacionBalcon"   class="img-responsive" width="1140" height="750">
+                      <div class="carousel-caption">
+                        <h3>Habitacion Vista al mar</h3>
+                        <p>Espectacurales vistas desde nuestros balcones</p>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <img src="Imagenes/Spa.jpg" alt="Spa" class="img-responsive"  width="1140" height="750">
+                      <div class="carousel-caption">
+                        <h3>Spa</h3>
+                        <p>Disponemos de spa con personal cualificado para dar masajes, baños relajantes y mucho mas</p>
+                      </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    
+
+    </body>
+</html>

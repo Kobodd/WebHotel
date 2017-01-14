@@ -1,0 +1,4 @@
+-- Añadir final de pagina con buscador de web
+-- Añadir botones para hacer un submit en contactos
+-- Añadir tipos de habitaciones que tiene el hotel
+-- Tooltip en la pagina contactos
