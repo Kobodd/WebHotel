@@ -43,9 +43,9 @@
             var texto =''
             var start = moment(document.getElementById("entrada").value);
             var end = moment(document.getElementById("salida").value);
-            var diferenia=moment.duration(end.diff(start)).asDays();
-            texto += diferenia;
-            document.getElementById("salidaDatos").innerHTML = texto ;
+            var diferencia=moment.duration(end.diff(start)).asDays();
+            var diferenciameses = moment.duration(end.diff(start)).asMonths() + 1;
+            document.getElementById("salidaDatos").innerHTML = diferencia ;
         }
         </script>
     

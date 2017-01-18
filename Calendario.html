@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
     
@@ -32,10 +33,10 @@
                     </div>
                 </div>
             </div>
-            
             <div class='col-md-2'>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="Calculo()">Reservar</button>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="reservas()">Reservar</button>
             </div>
+            
         </div>
             <div id="salidaDatos"></div>
          <!--
@@ -43,14 +44,54 @@
         -->
         <script>
             
-            function Calculo(){
-                var texto =''
-                var start = moment(document.getElementById("entrada").value);
-                var end = moment(document.getElementById("salida").value);
-                var diferencia = moment.duration(end.diff(start)).asDays();
-    
-                texto += diferencia
-                document.getElementById("salidaDatos").innerHTML = start
+            function reservas(){
+                var entradareserva = moment(document.getElementById("entrada").value);
+                var salidareserva = moment(document.getElementById("salida").value);
+                var diferencia=moment.duration(salidareserva.diff(entradareserva)).asDays();
+                var preciobase = 30;
+                var preciototal = 0
+                var preciofinal = 0
+                var diasemana = moment(entradareserva).day();
+                var mesactual = moment(entradareserva).month() + 1;
+                var diferenciameses = moment.duration(salidareserva.diff(entradareserva)).asMonths() + 1;
+                
+                for (i=0; i<diferencia; i++) {
+                    if(diasemana == 8){
+                        diasemana = 1;
+                    }
+                    if(diasemana == 6, diasemana == 7){
+                        preciototal = preciototal + (preciobase * 1,15);                                               
+                    }
+                    if(diferencia == 1){
+                        preciototal = preciobase * 1,20;
+                    }
+                    else{
+                        preciototal = preciototal + preciobase;
+                    }
+                    diasemana++;
+                }
+                
+                if(diferencia > 7){
+                    preciofinal = preciototal * 0,9;
+                }
+                
+                for (i=0; i<diferenciameses; i++) {
+                        if(mesactual == 12){
+                            mesactual = 1;
+                        }
+                        if(mesactual == 6, mesactual == 7, mesactual == 8, mesactual == 9){
+                            preciofinal = preciototal * 1,4;
+                        }
+                        else{
+                            preciofinal = preciototal;
+                        }
+                        
+                    }
+                
+                
+                
+                
+                document.getElementById("salidaDatos").innerHTML = preciofinal
             }
             </script>
          
