@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+    <title>Reservas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+</head>   
+    
+     <body>
+         <div class="container">             
+                <div class="hidden" role="alert" id="Alertafechas"></div>
+         </div>
+         
+        <div class="row">
+            <div class='col-md-5'>
+                <div class="form-group">
+                    <div class='input-group date' id='entradareserva'>
+                        <input id="entrada" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-5'>
+                <div class="form-group">
+                    <div class='input-group date' id='salidareserva'>
+                        <input id="salida" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-2'>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="reservas()">Reservar</button>
+            </div>
+            
+        </div>
+            <div id="salidaDatos"></div>
+         <!--
+            Script para saber el numero de dias entre dos fechas
+        -->
+        <script>
+            
+            function reservas(){
+                var currentday = moment(document.getElementById("entrada").value);
+                var salidareserva = moment(document.getElementById("salida").value);
+                var diferencia= moment.duration(salidareserva.diff(currentday)).asDays();
+                var preciobase = 30;
+                var preciofinal = 0;
+                var mesactual = moment(currentday).month() + 1;
+                var mes= mesactual;
+                var total =[];
+                var yavisto= 0;
+                var elemento = document.getElementById("Alertafechas");
+                
+                if(diferencia == 0){
+                    elemento.className = "alert alert-danger text-center col-md-4 col-md-offset-4";
+                    document.getElementById("Alertafechas").innerHTML = "No has introducido una fecha de Llegada o Salida "
+                    return;
+                }
+                else{
+                    elemento.className = "alert alert-success text-center col-md-4 col-md-offset-4";
+                    document.getElementById("Alertafechas").innerHTML = "Tu Reserva Se ha efectuado correctamente"
+                    
+                while (currentday < salidareserva){
+                    
+                    preciofinal = preciofinal + calcularprecio(currentday,preciobase);
+                    if(diferencia == 1){
+                        preciofinal = preciofinal * 1.20;
+                    }
+                    else if(mesactual!=mes){
+                        if (mesactual == 6 || mesactual == 7 || mesactual == 8 || mesactual == 9){
+                            preciofinal = preciofinal *1.4;
+                        }
+                        total.push(preciofinal);
+                        preciofinal= 0;
+                        mes = mesactual;
+                        yavisto = 1;
+                    }
+                    mesactual = moment(currentday).month() + 1;
+                    currentday = moment(currentday).add(1, 'd');
+                }
+                if(diferencia!=1){
+                    preciofinal = preciofinal + calcularprecio(currentday,preciobase)
+                }
+                if ((mesactual == 6 || mesactual == 7 || mesactual == 8 || mesactual == 9) && (yavisto != 1)){
+                        preciofinal = preciofinal *1.4;
+                }
+                total.push(preciofinal);
+                var final = resultadofinal(total);
+                if(diferencia>7){
+                    final = final * 0.9;
+                }
+                alert(currentday);
+                document.getElementById("salidaDatos").innerHTML = final
+                }
+            }
+            function resultadofinal(dato){
+                var precio = 0;
+                for(let i =0; i< dato.length; i++){
+                    precio= precio + dato[i];
+                }
+                return(precio);
+            }
+            function calcularprecio(currentday,preciobase){
+                var diasemana = moment(currentday).day();
+                var preciototal = 0;
+                if(diasemana == 6 || diasemana == 7){
+                    preciototal = preciototal + (preciobase * 1.15);
+                    return(preciototal);
+                }
+                else{
+                    preciototal = preciobase;
+                    return(preciototal);
+                }
+            }
+            
+        </script>
+         
+         <!--
+            Script Para el Calendario
+        -->
+        <script src="Moment.js"></script>
+        <script src="jquery.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/transition.js"></script>
+        <script type="text/javascript" src="bootstrap/js/collapse.js"></script>
+        <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#entradareserva').datetimepicker({
+                    minDate: moment(),
+                    format: "MM/DD/YYYY"
+                });
+                $('#salidareserva').datetimepicker({
+                    format: "MM/DD/YYYY",
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#entradareserva").on("dp.change", function (e) {
+                    $('#salidareserva').data("DateTimePicker").minDate(e.date);
+                });
+                $("#salidareserva").on("dp.change", function (e) {
+                    $('#entradareserva').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+         
+    </body>
+</html>

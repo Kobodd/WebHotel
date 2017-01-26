@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+    <title>Reservas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+</head>   
+    
+     <body>
+         
+        <div class="row">
+            <div class='col-md-5'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker6'>
+                        <input id="entrada" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-5'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker7'>
+                        <input id="salida" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-2'>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="reservas()">Reservar</button>
+            </div>
+            
+        </div>
+            <div id="salidaDatos"></div>
+         <!--
+            Script para saber el numero de dias entre dos fechas
+        -->
+        <script>
+            
+            function reservas(){
+                var entradareserva = fecha("entrada");
+                var salidareserva = fecha("salida");
+                var diferencia= dif(salidareserva,entradareserva,"days");
+                var diferenciameses = dif(salidareserva,entradareserva,"months") + 1;
+                var preciobase = 30;
+                var preciototal = 0
+                var preciofinal = 0
+                var diasemana = actual(entradareserva,"day");
+                var mesactual = actual(entradareserva,"month") + 1;
+                
+                for (i=0; i<diferencia; i++) {
+                    if(diasemana == 8){
+                        diasemana = 1;
+                    }
+                    if(diferencia == 1){
+                        preciototal = preciobase * 1,20;
+                    }
+                    else{
+                    if(diasemana == 6 || diasemana == 7){
+                        preciototal = preciototal + (preciobase * 1,15);                                               
+                    }
+                    else{
+                        preciototal = preciototal + preciobase;
+                    }
+                    }
+                    diasemana++;
+                    }
+                }
+                
+                if(diferencia > 7){
+                    preciofinal = preciototal * 0,9;
+                }
+                
+                for (i=0; i<diferenciameses; i++) {
+                        if(mesactual == 12){
+                            mesactual = 1;
+                        }
+                        if(mesactual == 6, mesactual == 7, mesactual == 8, mesactual == 9){
+                            preciofinal = preciototal * 1,4;
+                        }
+                        else{
+                            preciofinal = preciototal;
+                        }
+                        
+                    }
+                document.getElementById("salidaDatos").innerHTML = preciofinal
+                
+            function actual(entradareserva,formato){
+                if(formato = "day"){
+                    return(moment(entradareserva).day())
+                }
+                if(formato = "month"){
+                    return(moment(entradareserva).month())
+                }
+            }
+            function fecha(input){
+                return(moment(document.getElementById(input).value))
+                
+            }
+            function dif(end,start,format){
+                if(format == "days"){
+                    return(moment.duration(end.diff(start)).asDays())
+                }
+                if(format == "months"){
+                    return(moment.duration(end.diff(start)).asMonths())
+                }
+            }
+            </script>
+         
+         <!--
+            Script Para el Calendario
+        -->
+        <script src="Moment.js"></script>
+        <script src="jquery.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/transition.js"></script>
+        <script type="text/javascript" src="bootstrap/js/collapse.js"></script>
+        <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker6').datetimepicker();
+                $('#datetimepicker7').datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#datetimepicker6").on("dp.change", function (e) {
+                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker7").on("dp.change", function (e) {
+                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+         
+    </body>
+</html>
