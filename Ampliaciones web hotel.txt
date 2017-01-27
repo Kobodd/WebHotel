@@ -1,3 +1,0 @@
--- Tooltip en la pagina contactos
--- Añadir codigo a la reserva desde este codigo podemos ver cuando hemos reservado y cual es nuestro precio
--- Guiado por el hotel en una nueva pagina
